@@ -2,6 +2,7 @@ package com.dpinciotti.core.ui.di;
 
 import android.app.Activity;
 
+import com.dpinciotti.core.di.activity.ActivityBaseModule;
 import com.dpinciotti.core.di.scope.ActivityScope;
 import com.dpinciotti.core.ui.base.activity.ActivityLifecycleDelegate;
 import com.dpinciotti.core.ui.base.activity.ActivityLifecycleLogger;
@@ -15,12 +16,10 @@ import dagger.Provides;
  */
 
 @Module
-public class BaseActivityModule {
-
-    private Activity activity;
+public class BaseActivityModule extends ActivityBaseModule {
 
     public BaseActivityModule(Activity activity) {
-        this.activity = activity;
+        super(activity);
     }
 
     @Provides @ActivityScope

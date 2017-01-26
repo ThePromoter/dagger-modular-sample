@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.dpinciotti.core.di.activity.ActivityComponentBuilderHost;
 import com.dpinciotti.core.ui.di.BaseActivityComponent;
+import com.dpinciotti.core.ui.di.BaseActivityModule;
 
 import javax.inject.Inject;
 
@@ -73,6 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void injectBasicDependencies() {
         ((ActivityComponentBuilderHost) getApplication())
             .getActivityComponentBuilder(BaseActivity.class, BaseActivityComponent.Builder.class)
+            .activityModule(new BaseActivityModule(this))
             .build()
             .inject(this);
     }

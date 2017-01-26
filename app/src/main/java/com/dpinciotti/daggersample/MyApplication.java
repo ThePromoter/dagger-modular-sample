@@ -6,13 +6,15 @@ import android.app.Application;
 import com.dpinciotti.core.di.PlainComponent;
 import com.dpinciotti.core.di.activity.ActivityComponentBuilder;
 import com.dpinciotti.core.di.activity.ActivityComponentBuilderHost;
-import com.dpinciotti.daggersample.di.AppComponent;
-import com.dpinciotti.daggersample.di.DaggerAppComponent;
+import com.dpinciotti.daggersample.di.component.AppComponent;
+import com.dpinciotti.daggersample.di.component.DaggerAppComponent;
 
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+
+import timber.log.Timber;
 
 public class MyApplication extends Application implements ActivityComponentBuilderHost {
 
@@ -23,6 +25,10 @@ public class MyApplication extends Application implements ActivityComponentBuild
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         appComponent = DaggerAppComponent.create();
         appComponent.inject(this);
